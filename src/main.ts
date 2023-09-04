@@ -1,23 +1,8 @@
-interface Task {
-	title: string;
-	completed: boolean;
-}
+import { InMemoryTasksRepository } from "./infra/in-memory-tasks.repository.ts";
 
-const tasks: Task[] = [];
+const tasksRepository = new InMemoryTasksRepository();
 
-function addTask(title: string): void {
-	const task: Task = {
-		title,
-		completed: false,
-	};
-	tasks.push(task);
-}
+tasksRepository.create({ title: "Estudar", isCompleted: true });
+tasksRepository.create({ title: "Academia", isCompleted: true });
 
-function listTasks(): Task[] {
-	return tasks;
-}
-
-// Uso do código atual
-addTask("Ler livro");
-addTask("Fazer compras");
-console.log(listTasks());
+console.log(tasksRepository.findAll());
